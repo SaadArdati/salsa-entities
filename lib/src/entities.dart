@@ -376,9 +376,8 @@ class Playlist implements Entity {
 class ChaChaUserSnippet implements Entity {
   String id;
   String displayName;
-  String profilePicture;
 
-  ChaChaUserSnippet({@required this.id, @required this.displayName, @required this.profilePicture});
+  ChaChaUserSnippet({@required this.id, @required this.displayName});
 
   factory ChaChaUserSnippet.fromJson(Map<String, dynamic> json) => _$ChaChaUserSnippetFromJson(json);
 
@@ -402,7 +401,6 @@ class ChaChaUser extends ChaChaUserSnippet implements Entity {
   ChaChaUser({
     @required String id,
     @required String displayName,
-    @required String profilePicture,
     this.email,
     this.public = false,
     this.tracks = const [],
@@ -413,7 +411,7 @@ class ChaChaUser extends ChaChaUserSnippet implements Entity {
     this.friends = const [],
     this.friendIDs = const [],
     this.blockedUserIDs = const [],
-  }) : super(id: id, displayName: displayName, profilePicture: profilePicture);
+  }) : super(id: id, displayName: displayName);
 
   void addPlaylist(Playlist playlist) {
     playlists.add(playlist);
@@ -502,7 +500,7 @@ class ChaChaUser extends ChaChaUserSnippet implements Entity {
     }
   }
 
-  ChaChaUserSnippet toSnippet() => ChaChaUserSnippet(id: id, displayName: displayName, profilePicture: profilePicture);
+  ChaChaUserSnippet toSnippet() => ChaChaUserSnippet(id: id, displayName: displayName);
 
   factory ChaChaUser.fromJson(Map<String, dynamic> json) => _$ChaChaUserFromJson(json);
 
