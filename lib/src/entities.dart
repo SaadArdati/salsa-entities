@@ -442,7 +442,7 @@ class ChaChaUser extends ChaChaUserSnippet implements Entity {
   }
 
   void removeTrack(String id) {
-    for (FullTrack track in tracks) {
+    for (var track in tracks) {
       if (track.id == id) {
         tracks.remove(track);
         break;
