@@ -119,19 +119,7 @@ class SnippetTrack implements Entity {
     clipEnd ??= duration;
   }
 
-  int getClippedDuration() {
-    if (clipStart == -1) {
-      if (clipEnd == -1) {
-        return duration.toInt();
-      } else {
-        return clipEnd;
-      }
-    } else if (clipEnd == -1) {
-      return (duration - clipStart).toInt();
-    } else {
-      return clipEnd - clipStart;
-    }
-  }
+  int getClippedDuration() => clipEnd - clipStart;
 
   factory SnippetTrack.fromJson(Map<String, dynamic> json) => _$SnippetTrackFromJson(json);
 
