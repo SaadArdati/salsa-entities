@@ -380,35 +380,35 @@ class Playlist implements Entity {
 }
 
 @JsonSerializable(checked: true, explicitToJson: true, createFactory: true, createToJson: true)
-class ChaChaUserSnippet implements Entity {
+class ChaChaUserAccountInfo implements Entity {
   String id;
   String displayName;
+  String profilePicture;
 
-  ChaChaUserSnippet({@required this.id, @required this.displayName});
+  ChaChaUserAccountInfo({@required this.id, @required this.displayName, @required this.profilePicture});
 
-  factory ChaChaUserSnippet.fromJson(Map<String, dynamic> json) => _$ChaChaUserSnippetFromJson(json);
+  factory ChaChaUserAccountInfo.fromJson(Map<String, dynamic> json) => _$ChaChaUserAccountInfoFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$ChaChaUserSnippetToJson(this);
+  Map<String, dynamic> toJson() => _$ChaChaUserAccountInfoToJson(this);
 }
 
 @JsonSerializable(checked: true, explicitToJson: true, createFactory: true, createToJson: true)
-class ChaChaUser extends ChaChaUserSnippet implements Entity {
+class ChaChaUser implements Entity {
   List<SnippetTrack> tracks;
   List<String> trackIDs;
   List<Playlist> playlists;
   List<String> playlistIDs;
   List<String> friendIDs;
-  List<ChaChaUserSnippet> friends;
-  List<ChaChaUserSnippet> friendRequests;
+  List<ChaChaUserAccountInfo> friends;
+  List<ChaChaUserAccountInfo> friendRequests;
   List<String> blockedUserIDs;
   bool public;
-  String email;
 
   ChaChaUser({
     @required String id,
     @required String displayName,
-    this.email,
+    @required String profilePicture,
     this.public = false,
     this.tracks = const [],
     this.playlists = const [],
@@ -418,7 +418,7 @@ class ChaChaUser extends ChaChaUserSnippet implements Entity {
     this.friends = const [],
     this.friendIDs = const [],
     this.blockedUserIDs = const [],
-  }) : super(id: id, displayName: displayName);
+  });
 
   void addPlaylist(Playlist playlist) {
     playlists.add(playlist);
@@ -492,7 +492,7 @@ class ChaChaUser extends ChaChaUserSnippet implements Entity {
     playlists = newPlaylists;
   }
 
-  void addFriend(ChaChaUserSnippet friend) {
+  void addFriend(ChaChaUserAccountInfo friend) {
     friendIDs.add(friend.id);
     friends.add(friend);
   }
@@ -506,8 +506,6 @@ class ChaChaUser extends ChaChaUserSnippet implements Entity {
       }
     }
   }
-
-  ChaChaUserSnippet toSnippet() => ChaChaUserSnippet(id: id, displayName: displayName);
 
   factory ChaChaUser.fromJson(Map<String, dynamic> json) => _$ChaChaUserFromJson(json);
 
