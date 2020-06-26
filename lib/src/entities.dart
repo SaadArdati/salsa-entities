@@ -92,7 +92,6 @@ class SnippetTrack implements Entity {
   int clipEnd;
   int listens;
   int originListens;
-  Uint8List waveform;
   String url;
   String artistName;
   String artistURL;
@@ -111,7 +110,6 @@ class SnippetTrack implements Entity {
       @required this.thumbnailURL,
       @required this.fullCoverURL,
       @required this.blurHash,
-      this.waveform,
       this.clipEnd,
       this.clipStart = 0,
       this.listens = 0,
@@ -150,7 +148,6 @@ class ScoredSnippetTrack extends SnippetTrack implements Entity {
   }) : super(
             id: id,
             duration: duration,
-            waveform: null,
             url: url,
             clipStart: clipStart,
             clipEnd: clipEnd,
@@ -166,7 +163,6 @@ class ScoredSnippetTrack extends SnippetTrack implements Entity {
       : super(
           id: track.id,
           duration: track.duration,
-          waveform: track.waveform,
           url: track.url,
           clipStart: track.clipStart,
           clipEnd: track.clipEnd,
@@ -200,11 +196,11 @@ class FullTrack extends SnippetTrack implements Entity {
   String description;
   int requests;
   DateTime publishedAt;
+  Uint8List waveform;
 
   FullTrack({
     @required String id,
     @required int duration,
-    @required Uint8List waveform,
     @required String url,
     @required String artistName,
     @required String artistURL,
@@ -224,10 +220,10 @@ class FullTrack extends SnippetTrack implements Entity {
     @required this.originURL,
     @required this.description,
     @required this.requests,
+    @required this.waveform,
   }) : super(
             id: id,
             duration: duration,
-            waveform: waveform,
             url: url,
             clipStart: clipStart,
             clipEnd: clipEnd,
@@ -244,7 +240,6 @@ class FullTrack extends SnippetTrack implements Entity {
     return SnippetTrack(
         id: id,
         duration: duration,
-        waveform: waveform,
         url: url,
         clipStart: clipStart,
         clipEnd: clipEnd,
