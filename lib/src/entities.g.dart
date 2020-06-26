@@ -38,8 +38,6 @@ SnippetTrack _$SnippetTrackFromJson(Map<String, dynamic> json) {
       thumbnailURL: $checkedConvert(json, 'thumbnailURL', (v) => v as String),
       fullCoverURL: $checkedConvert(json, 'fullCoverURL', (v) => v as String),
       blurHash: $checkedConvert(json, 'blurHash', (v) => v as String),
-      waveform: $checkedConvert(json, 'waveform',
-          (v) => const ByteArrayJsonConverter().fromJson(v as List)),
       clipEnd: $checkedConvert(json, 'clipEnd', (v) => v as int),
       clipStart: $checkedConvert(json, 'clipStart', (v) => v as int),
       listens: $checkedConvert(json, 'listens', (v) => v as int),
@@ -57,7 +55,6 @@ Map<String, dynamic> _$SnippetTrackToJson(SnippetTrack instance) =>
       'clipEnd': instance.clipEnd,
       'listens': instance.listens,
       'originListens': instance.originListens,
-      'waveform': const ByteArrayJsonConverter().toJson(instance.waveform),
       'url': instance.url,
       'artistName': instance.artistName,
       'artistURL': instance.artistURL,
@@ -85,11 +82,6 @@ ScoredSnippetTrack _$ScoredSnippetTrackFromJson(Map<String, dynamic> json) {
       clipStart: $checkedConvert(json, 'clipStart', (v) => v as int),
       clipEnd: $checkedConvert(json, 'clipEnd', (v) => v as int),
     );
-    $checkedConvert(
-        json,
-        'waveform',
-        (v) =>
-            val.waveform = const ByteArrayJsonConverter().fromJson(v as List));
     return val;
   });
 }
@@ -102,7 +94,6 @@ Map<String, dynamic> _$ScoredSnippetTrackToJson(ScoredSnippetTrack instance) =>
       'clipEnd': instance.clipEnd,
       'listens': instance.listens,
       'originListens': instance.originListens,
-      'waveform': const ByteArrayJsonConverter().toJson(instance.waveform),
       'url': instance.url,
       'artistName': instance.artistName,
       'artistURL': instance.artistURL,
@@ -118,8 +109,6 @@ FullTrack _$FullTrackFromJson(Map<String, dynamic> json) {
     final val = FullTrack(
       id: $checkedConvert(json, 'id', (v) => v as String),
       duration: $checkedConvert(json, 'duration', (v) => v as int),
-      waveform: $checkedConvert(json, 'waveform',
-          (v) => const ByteArrayJsonConverter().fromJson(v as List)),
       url: $checkedConvert(json, 'url', (v) => v as String),
       artistName: $checkedConvert(json, 'artistName', (v) => v as String),
       artistURL: $checkedConvert(json, 'artistURL', (v) => v as String),
@@ -162,6 +151,8 @@ FullTrack _$FullTrackFromJson(Map<String, dynamic> json) {
       originURL: $checkedConvert(json, 'originURL', (v) => v as String),
       description: $checkedConvert(json, 'description', (v) => v as String),
       requests: $checkedConvert(json, 'requests', (v) => v as int),
+      waveform: $checkedConvert(json, 'waveform',
+          (v) => const ByteArrayJsonConverter().fromJson(v as List)),
     );
     return val;
   });
@@ -174,7 +165,6 @@ Map<String, dynamic> _$FullTrackToJson(FullTrack instance) => <String, dynamic>{
       'clipEnd': instance.clipEnd,
       'listens': instance.listens,
       'originListens': instance.originListens,
-      'waveform': const ByteArrayJsonConverter().toJson(instance.waveform),
       'url': instance.url,
       'artistName': instance.artistName,
       'artistURL': instance.artistURL,
@@ -192,6 +182,7 @@ Map<String, dynamic> _$FullTrackToJson(FullTrack instance) => <String, dynamic>{
       'description': instance.description,
       'requests': instance.requests,
       'publishedAt': instance.publishedAt?.toIso8601String(),
+      'waveform': const ByteArrayJsonConverter().toJson(instance.waveform),
     };
 
 GeniusTrack _$GeniusTrackFromJson(Map<String, dynamic> json) {
