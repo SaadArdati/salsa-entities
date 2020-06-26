@@ -395,6 +395,7 @@ class ChaChaUserAccountInfo implements Entity {
 
 @JsonSerializable(checked: true, explicitToJson: true, createFactory: true, createToJson: true)
 class ChaChaUser implements Entity {
+  String id;
   List<SnippetTrack> tracks;
   List<String> trackIDs;
   List<Playlist> playlists;
@@ -406,9 +407,7 @@ class ChaChaUser implements Entity {
   bool public;
 
   ChaChaUser({
-    @required String id,
-    @required String displayName,
-    @required String profilePicture,
+    @required this.id,
     this.public = false,
     this.tracks = const [],
     this.playlists = const [],
