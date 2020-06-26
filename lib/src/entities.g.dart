@@ -104,6 +104,31 @@ Map<String, dynamic> _$ScoredSnippetTrackToJson(ScoredSnippetTrack instance) =>
       'score': instance.score,
     };
 
+Waveform _$WaveformFromJson(Map<String, dynamic> json) {
+  return $checkedNew('Waveform', json, () {
+    final val = Waveform(
+      waveform: $checkedConvert(json, 'waveform',
+          (v) => const ByteArrayJsonConverter().fromJson(v as List)),
+      channels: $checkedConvert(json, 'channels', (v) => v as int),
+      length: $checkedConvert(json, 'length', (v) => v as int),
+      bits: $checkedConvert(json, 'bits', (v) => v as int),
+      samplesPerPixel:
+          $checkedConvert(json, 'samplesPerPixel', (v) => v as int),
+      sampleRate: $checkedConvert(json, 'sampleRate', (v) => v as int),
+    );
+    return val;
+  });
+}
+
+Map<String, dynamic> _$WaveformToJson(Waveform instance) => <String, dynamic>{
+      'waveform': const ByteArrayJsonConverter().toJson(instance.waveform),
+      'channels': instance.channels,
+      'length': instance.length,
+      'bits': instance.bits,
+      'samplesPerPixel': instance.samplesPerPixel,
+      'sampleRate': instance.sampleRate,
+    };
+
 FullTrack _$FullTrackFromJson(Map<String, dynamic> json) {
   return $checkedNew('FullTrack', json, () {
     final val = FullTrack(
@@ -151,8 +176,11 @@ FullTrack _$FullTrackFromJson(Map<String, dynamic> json) {
       originURL: $checkedConvert(json, 'originURL', (v) => v as String),
       description: $checkedConvert(json, 'description', (v) => v as String),
       requests: $checkedConvert(json, 'requests', (v) => v as int),
-      waveform: $checkedConvert(json, 'waveform',
-          (v) => const ByteArrayJsonConverter().fromJson(v as List)),
+      waveform: $checkedConvert(
+          json,
+          'waveform',
+          (v) =>
+              v == null ? null : Waveform.fromJson(v as Map<String, dynamic>)),
     );
     return val;
   });
@@ -182,7 +210,7 @@ Map<String, dynamic> _$FullTrackToJson(FullTrack instance) => <String, dynamic>{
       'description': instance.description,
       'requests': instance.requests,
       'publishedAt': instance.publishedAt?.toIso8601String(),
-      'waveform': const ByteArrayJsonConverter().toJson(instance.waveform),
+      'waveform': instance.waveform?.toJson(),
     };
 
 GeniusTrack _$GeniusTrackFromJson(Map<String, dynamic> json) {
