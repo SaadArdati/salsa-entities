@@ -183,6 +183,30 @@ class ScoredSnippetTrack extends SnippetTrack implements Entity {
 
 @JsonSerializable(checked: true, explicitToJson: true, createFactory: true, createToJson: true)
 @ByteArrayJsonConverter()
+class Waveform implements Entity {
+  Uint8List waveform;
+  int channels;
+  int length;
+  int bits;
+  int samplesPerPixel;
+  int sampleRate;
+
+  Waveform(
+      {@required this.waveform,
+      @required this.channels,
+      @required this.length,
+      @required this.bits,
+      @required this.samplesPerPixel,
+      @required this.sampleRate});
+
+  factory Waveform.fromJson(Map<String, dynamic> json) => _$WaveformFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$WaveformToJson(this);
+}
+
+@JsonSerializable(checked: true, explicitToJson: true, createFactory: true, createToJson: true)
+@ByteArrayJsonConverter()
 class FullTrack extends SnippetTrack implements Entity {
   List<GeniusTrack> geniusSuggestions;
 
@@ -196,7 +220,7 @@ class FullTrack extends SnippetTrack implements Entity {
   String description;
   int requests;
   DateTime publishedAt;
-  Uint8List waveform;
+  Waveform waveform;
 
   FullTrack({
     @required String id,
@@ -253,11 +277,11 @@ class FullTrack extends SnippetTrack implements Entity {
         blurHash: blurHash);
   }
 
-  factory FullTrack.fromJson(Map<String, dynamic> json) => _$FullTrackFromJson(json);
-
   void preferredTrackName() {
     if (editSuggestions.length < 3) return;
   }
+
+  factory FullTrack.fromJson(Map<String, dynamic> json) => _$FullTrackFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$FullTrackToJson(this);
