@@ -184,7 +184,7 @@ class ScoredSnippetTrack extends SnippetTrack implements Entity {
 @JsonSerializable(checked: true, explicitToJson: true, createFactory: true, createToJson: true)
 @ByteArrayJsonConverter()
 class Waveform implements Entity {
-  Uint8List waveform;
+  Uint8List data;
   int channels;
   int length;
   int bits;
@@ -192,7 +192,7 @@ class Waveform implements Entity {
   int sampleRate;
 
   Waveform(
-      {@required this.waveform,
+      {@required this.data,
       @required this.channels,
       @required this.length,
       @required this.bits,

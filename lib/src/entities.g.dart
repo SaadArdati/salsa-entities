@@ -107,7 +107,7 @@ Map<String, dynamic> _$ScoredSnippetTrackToJson(ScoredSnippetTrack instance) =>
 Waveform _$WaveformFromJson(Map<String, dynamic> json) {
   return $checkedNew('Waveform', json, () {
     final val = Waveform(
-      waveform: $checkedConvert(json, 'waveform',
+      data: $checkedConvert(json, 'data',
           (v) => const ByteArrayJsonConverter().fromJson(v as List)),
       channels: $checkedConvert(json, 'channels', (v) => v as int),
       length: $checkedConvert(json, 'length', (v) => v as int),
@@ -121,7 +121,7 @@ Waveform _$WaveformFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$WaveformToJson(Waveform instance) => <String, dynamic>{
-      'waveform': const ByteArrayJsonConverter().toJson(instance.waveform),
+      'data': const ByteArrayJsonConverter().toJson(instance.data),
       'channels': instance.channels,
       'length': instance.length,
       'bits': instance.bits,
