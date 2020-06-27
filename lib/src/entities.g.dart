@@ -300,6 +300,7 @@ Map<String, dynamic> _$ChaChaUserAccountInfoToJson(
 ChaChaUser _$ChaChaUserFromJson(Map<String, dynamic> json) {
   return $checkedNew('ChaChaUser', json, () {
     final val = ChaChaUser(
+      id: $checkedConvert(json, 'id', (v) => v as String),
       public: $checkedConvert(json, 'public', (v) => v as bool),
       tracks: $checkedConvert(
           json,
@@ -348,6 +349,7 @@ ChaChaUser _$ChaChaUserFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$ChaChaUserToJson(ChaChaUser instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'tracks': instance.tracks?.map((e) => e?.toJson())?.toList(),
       'trackIDs': instance.trackIDs,
       'playlists': instance.playlists?.map((e) => e?.toJson())?.toList(),
