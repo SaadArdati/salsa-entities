@@ -20,7 +20,8 @@ extension NullHelper on Entity {
             if (_anyNullFieldsInMap(element)) {
               return true;
             } else if (element == null) {
-              print('KEY of LIST [${entry.key}] has a null element [${element}]\n${entry.value.toString()}');
+              print(
+                  'KEY of LIST [${entry.key}] has a null element [${element}]\n${entry.value.toString()}');
               return true;
             }
           }
@@ -80,7 +81,8 @@ class EditSuggestion implements Entity {
           clipEnd == other.clipEnd;
 
   @override
-  int get hashCode => artistName.hashCode ^ trackName.hashCode ^ clipStart.hashCode ^ clipEnd.hashCode;
+  int get hashCode =>
+      artistName.hashCode ^ trackName.hashCode ^ clipStart.hashCode ^ clipEnd.hashCode;
 }
 
 @JsonSerializable(checked: true, explicitToJson: true, createFactory: true, createToJson: true)
@@ -143,14 +145,14 @@ class ScoredSnippetTrack extends SnippetTrack implements Entity {
     @required String blurHash,
     int listens = 0,
     int originListens = 0,
-    int clipStart,
+    int clipStart = 0,
     int clipEnd,
   }) : super(
             id: id,
             duration: duration,
             url: url,
             clipStart: clipStart,
-            clipEnd: clipEnd,
+            clipEnd: clipEnd ?? duration,
             artistName: artistName,
             artistURL: artistURL,
             trackName: trackName,
@@ -175,7 +177,8 @@ class ScoredSnippetTrack extends SnippetTrack implements Entity {
           blurHash: track.blurHash,
         );
 
-  factory ScoredSnippetTrack.fromJson(Map<String, dynamic> json) => _$ScoredSnippetTrackFromJson(json);
+  factory ScoredSnippetTrack.fromJson(Map<String, dynamic> json) =>
+      _$ScoredSnippetTrackFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$ScoredSnippetTrackToJson(this);
@@ -250,7 +253,7 @@ class FullTrack extends SnippetTrack implements Entity {
             duration: duration,
             url: url,
             clipStart: clipStart,
-            clipEnd: clipEnd,
+            clipEnd: clipEnd ?? duration,
             artistName: artistName,
             artistURL: artistURL,
             trackName: trackName,
@@ -385,9 +388,11 @@ class ChaChaUserAccountInfo implements Entity {
   String displayName;
   String profilePicture;
 
-  ChaChaUserAccountInfo({@required this.id, @required this.displayName, @required this.profilePicture});
+  ChaChaUserAccountInfo(
+      {@required this.id, @required this.displayName, @required this.profilePicture});
 
-  factory ChaChaUserAccountInfo.fromJson(Map<String, dynamic> json) => _$ChaChaUserAccountInfoFromJson(json);
+  factory ChaChaUserAccountInfo.fromJson(Map<String, dynamic> json) =>
+      _$ChaChaUserAccountInfoFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$ChaChaUserAccountInfoToJson(this);
