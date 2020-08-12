@@ -51,7 +51,8 @@ class ByteArrayJsonConverter implements JsonConverter<Uint8List, List<dynamic>> 
   List<dynamic> toJson(Uint8List list) => list == null ? [] : List<dynamic>.from(list);
 }
 
-@JsonSerializable(checked: true, explicitToJson: true, createFactory: true, createToJson: true)
+@JsonSerializable(
+    checked: true, explicitToJson: true, createFactory: true, createToJson: true, anyMap: true)
 class EditSuggestion implements Entity {
   String artistName;
   String trackName;
@@ -65,7 +66,7 @@ class EditSuggestion implements Entity {
     @required this.clipEnd,
   });
 
-  factory EditSuggestion.fromJson(Map<String, dynamic> json) => _$EditSuggestionFromJson(json);
+  factory EditSuggestion.fromJson(Map json) => _$EditSuggestionFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$EditSuggestionToJson(this);
@@ -85,7 +86,8 @@ class EditSuggestion implements Entity {
       artistName.hashCode ^ trackName.hashCode ^ clipStart.hashCode ^ clipEnd.hashCode;
 }
 
-@JsonSerializable(checked: true, explicitToJson: true, createFactory: true, createToJson: true)
+@JsonSerializable(
+    checked: true, explicitToJson: true, createFactory: true, createToJson: true, anyMap: true)
 @ByteArrayJsonConverter()
 class SnippetTrack implements Entity {
   String id;
@@ -121,13 +123,14 @@ class SnippetTrack implements Entity {
 
   int getClippedDuration() => clipEnd - clipStart;
 
-  factory SnippetTrack.fromJson(Map<String, dynamic> json) => _$SnippetTrackFromJson(json);
+  factory SnippetTrack.fromJson(Map json) => _$SnippetTrackFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$SnippetTrackToJson(this);
 }
 
-@JsonSerializable(checked: true, explicitToJson: true, createFactory: true, createToJson: true)
+@JsonSerializable(
+    checked: true, explicitToJson: true, createFactory: true, createToJson: true, anyMap: true)
 @ByteArrayJsonConverter()
 class ScoredSnippetTrack extends SnippetTrack implements Entity {
   double score;
@@ -177,14 +180,15 @@ class ScoredSnippetTrack extends SnippetTrack implements Entity {
           blurHash: track.blurHash,
         );
 
-  factory ScoredSnippetTrack.fromJson(Map<String, dynamic> json) =>
+  factory ScoredSnippetTrack.fromJson(Map json) =>
       _$ScoredSnippetTrackFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$ScoredSnippetTrackToJson(this);
 }
 
-@JsonSerializable(checked: true, explicitToJson: true, createFactory: true, createToJson: true)
+@JsonSerializable(
+    checked: true, explicitToJson: true, createFactory: true, createToJson: true, anyMap: true)
 @ByteArrayJsonConverter()
 class Waveform implements Entity {
   Uint8List data;
@@ -202,13 +206,14 @@ class Waveform implements Entity {
       @required this.samplesPerPixel,
       @required this.sampleRate});
 
-  factory Waveform.fromJson(Map<String, dynamic> json) => _$WaveformFromJson(json);
+  factory Waveform.fromJson(Map json) => _$WaveformFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$WaveformToJson(this);
 }
 
-@JsonSerializable(checked: true, explicitToJson: true, createFactory: true, createToJson: true)
+@JsonSerializable(
+    checked: true, explicitToJson: true, createFactory: true, createToJson: true, anyMap: true)
 @ByteArrayJsonConverter()
 class FullTrack extends SnippetTrack implements Entity {
   List<GeniusTrack> geniusSuggestions;
@@ -284,13 +289,14 @@ class FullTrack extends SnippetTrack implements Entity {
     if (editSuggestions.length < 3) return;
   }
 
-  factory FullTrack.fromJson(Map<String, dynamic> json) => _$FullTrackFromJson(json);
+  factory FullTrack.fromJson(Map json) => _$FullTrackFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$FullTrackToJson(this);
 }
 
-@JsonSerializable(checked: true, explicitToJson: true, createFactory: true, createToJson: true)
+@JsonSerializable(
+    checked: true, explicitToJson: true, createFactory: true, createToJson: true, anyMap: true)
 class GeniusTrack implements Entity {
   String trackURL;
   String trackName;
@@ -305,7 +311,7 @@ class GeniusTrack implements Entity {
       @required this.artistURL,
       @required this.lyrics});
 
-  factory GeniusTrack.fromJson(Map<String, dynamic> json) => _$GeniusTrackFromJson(json);
+  factory GeniusTrack.fromJson(Map json) => _$GeniusTrackFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$GeniusTrackToJson(this);
@@ -316,7 +322,8 @@ class GeniusTrack implements Entity {
   }
 }
 
-@JsonSerializable(checked: true, explicitToJson: true, createFactory: true, createToJson: true)
+@JsonSerializable(
+    checked: true, explicitToJson: true, createFactory: true, createToJson: true, anyMap: true)
 class Playlist implements Entity {
   String id;
   String name;
@@ -376,13 +383,14 @@ class Playlist implements Entity {
     trackIDs.remove(id);
   }
 
-  factory Playlist.fromJson(Map<String, dynamic> json) => _$PlaylistFromJson(json);
+  factory Playlist.fromJson(Map json) => _$PlaylistFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$PlaylistToJson(this);
 }
 
-@JsonSerializable(checked: true, explicitToJson: true, createFactory: true, createToJson: true)
+@JsonSerializable(
+    checked: true, explicitToJson: true, createFactory: true, createToJson: true, anyMap: true)
 class ChaChaUserAccountInfo implements Entity {
   String id;
   String displayName;
@@ -391,15 +399,16 @@ class ChaChaUserAccountInfo implements Entity {
   ChaChaUserAccountInfo(
       {@required this.id, @required this.displayName, @required this.profilePicture});
 
-  factory ChaChaUserAccountInfo.fromJson(Map<String, dynamic> json) =>
+  factory ChaChaUserAccountInfo.fromJson(Map json) =>
       _$ChaChaUserAccountInfoFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$ChaChaUserAccountInfoToJson(this);
 }
 
-@JsonSerializable(checked: true, explicitToJson: true, createFactory: true, createToJson: true)
-class ChaChaUser implements Entity {
+@JsonSerializable(
+    checked: true, explicitToJson: true, createFactory: true, createToJson: true, anyMap: true)
+class User implements Entity {
   String id;
   List<SnippetTrack> tracks;
   List<String> trackIDs;
@@ -411,7 +420,7 @@ class ChaChaUser implements Entity {
   List<String> blockedUserIDs;
   bool public;
 
-  ChaChaUser({
+  User({
     @required this.id,
     this.public = false,
     this.tracks = const [],
@@ -511,8 +520,8 @@ class ChaChaUser implements Entity {
     }
   }
 
-  factory ChaChaUser.fromJson(Map<String, dynamic> json) => _$ChaChaUserFromJson(json);
+  factory User.fromJson(Map json) => _$UserFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$ChaChaUserToJson(this);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }

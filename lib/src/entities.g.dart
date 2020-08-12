@@ -6,7 +6,7 @@ part of 'entities.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-EditSuggestion _$EditSuggestionFromJson(Map<String, dynamic> json) {
+EditSuggestion _$EditSuggestionFromJson(Map json) {
   return $checkedNew('EditSuggestion', json, () {
     final val = EditSuggestion(
       artistName: $checkedConvert(json, 'artistName', (v) => v as String),
@@ -26,7 +26,7 @@ Map<String, dynamic> _$EditSuggestionToJson(EditSuggestion instance) =>
       'clipEnd': instance.clipEnd,
     };
 
-SnippetTrack _$SnippetTrackFromJson(Map<String, dynamic> json) {
+SnippetTrack _$SnippetTrackFromJson(Map json) {
   return $checkedNew('SnippetTrack', json, () {
     final val = SnippetTrack(
       id: $checkedConvert(json, 'id', (v) => v as String),
@@ -64,7 +64,7 @@ Map<String, dynamic> _$SnippetTrackToJson(SnippetTrack instance) =>
       'blurHash': instance.blurHash,
     };
 
-ScoredSnippetTrack _$ScoredSnippetTrackFromJson(Map<String, dynamic> json) {
+ScoredSnippetTrack _$ScoredSnippetTrackFromJson(Map json) {
   return $checkedNew('ScoredSnippetTrack', json, () {
     final val = ScoredSnippetTrack(
       score: $checkedConvert(json, 'score', (v) => (v as num)?.toDouble()),
@@ -104,7 +104,7 @@ Map<String, dynamic> _$ScoredSnippetTrackToJson(ScoredSnippetTrack instance) =>
       'score': instance.score,
     };
 
-Waveform _$WaveformFromJson(Map<String, dynamic> json) {
+Waveform _$WaveformFromJson(Map json) {
   return $checkedNew('Waveform', json, () {
     final val = Waveform(
       data: $checkedConvert(json, 'data',
@@ -129,7 +129,7 @@ Map<String, dynamic> _$WaveformToJson(Waveform instance) => <String, dynamic>{
       'sampleRate': instance.sampleRate,
     };
 
-FullTrack _$FullTrackFromJson(Map<String, dynamic> json) {
+FullTrack _$FullTrackFromJson(Map json) {
   return $checkedNew('FullTrack', json, () {
     final val = FullTrack(
       id: $checkedConvert(json, 'id', (v) => v as String),
@@ -151,36 +151,28 @@ FullTrack _$FullTrackFromJson(Map<String, dynamic> json) {
           json,
           'geniusSuggestions',
           (v) => (v as List)
-              ?.map((e) => e == null
-                  ? null
-                  : GeniusTrack.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => e == null ? null : GeniusTrack.fromJson(e as Map))
               ?.toList()),
       editSuggestions: $checkedConvert(
           json,
           'editSuggestions',
-          (v) => (v as Map<String, dynamic>)?.map(
-                (k, e) => MapEntry(
-                    k,
-                    e == null
-                        ? null
-                        : EditSuggestion.fromJson(e as Map<String, dynamic>)),
+          (v) => (v as Map)?.map(
+                (k, e) => MapEntry(k as String,
+                    e == null ? null : EditSuggestion.fromJson(e as Map)),
               )),
       editSuggestionVotes: $checkedConvert(
           json,
           'editSuggestionVotes',
-          (v) => (v as Map<String, dynamic>)?.map(
-                (k, e) => MapEntry(k, e as String),
+          (v) => (v as Map)?.map(
+                (k, e) => MapEntry(k as String, e as String),
               )),
       ngrams: $checkedConvert(json, 'ngrams',
           (v) => (v as List)?.map((e) => e as String)?.toList()),
       originURL: $checkedConvert(json, 'originURL', (v) => v as String),
       description: $checkedConvert(json, 'description', (v) => v as String),
       requests: $checkedConvert(json, 'requests', (v) => v as int),
-      waveform: $checkedConvert(
-          json,
-          'waveform',
-          (v) =>
-              v == null ? null : Waveform.fromJson(v as Map<String, dynamic>)),
+      waveform: $checkedConvert(json, 'waveform',
+          (v) => v == null ? null : Waveform.fromJson(v as Map)),
     );
     return val;
   });
@@ -213,7 +205,7 @@ Map<String, dynamic> _$FullTrackToJson(FullTrack instance) => <String, dynamic>{
       'waveform': instance.waveform?.toJson(),
     };
 
-GeniusTrack _$GeniusTrackFromJson(Map<String, dynamic> json) {
+GeniusTrack _$GeniusTrackFromJson(Map json) {
   return $checkedNew('GeniusTrack', json, () {
     final val = GeniusTrack(
       trackURL: $checkedConvert(json, 'trackURL', (v) => v as String),
@@ -235,7 +227,7 @@ Map<String, dynamic> _$GeniusTrackToJson(GeniusTrack instance) =>
       'lyrics': instance.lyrics,
     };
 
-Playlist _$PlaylistFromJson(Map<String, dynamic> json) {
+Playlist _$PlaylistFromJson(Map json) {
   return $checkedNew('Playlist', json, () {
     final val = Playlist(
       name: $checkedConvert(json, 'name', (v) => v as String),
@@ -246,9 +238,7 @@ Playlist _$PlaylistFromJson(Map<String, dynamic> json) {
           json,
           'tracks',
           (v) => (v as List)
-              ?.map((e) => e == null
-                  ? null
-                  : SnippetTrack.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => e == null ? null : SnippetTrack.fromJson(e as Map))
               ?.toList()),
       id: $checkedConvert(json, 'id', (v) => v as String),
       ownerID: $checkedConvert(json, 'ownerID', (v) => v as String),
@@ -276,8 +266,7 @@ Map<String, dynamic> _$PlaylistToJson(Playlist instance) => <String, dynamic>{
       'public': instance.public,
     };
 
-ChaChaUserAccountInfo _$ChaChaUserAccountInfoFromJson(
-    Map<String, dynamic> json) {
+ChaChaUserAccountInfo _$ChaChaUserAccountInfoFromJson(Map json) {
   return $checkedNew('ChaChaUserAccountInfo', json, () {
     final val = ChaChaUserAccountInfo(
       id: $checkedConvert(json, 'id', (v) => v as String),
@@ -297,26 +286,22 @@ Map<String, dynamic> _$ChaChaUserAccountInfoToJson(
       'profilePicture': instance.profilePicture,
     };
 
-ChaChaUser _$ChaChaUserFromJson(Map<String, dynamic> json) {
-  return $checkedNew('ChaChaUser', json, () {
-    final val = ChaChaUser(
+User _$UserFromJson(Map json) {
+  return $checkedNew('User', json, () {
+    final val = User(
       id: $checkedConvert(json, 'id', (v) => v as String),
       public: $checkedConvert(json, 'public', (v) => v as bool),
       tracks: $checkedConvert(
           json,
           'tracks',
           (v) => (v as List)
-              ?.map((e) => e == null
-                  ? null
-                  : SnippetTrack.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => e == null ? null : SnippetTrack.fromJson(e as Map))
               ?.toList()),
       playlists: $checkedConvert(
           json,
           'playlists',
           (v) => (v as List)
-              ?.map((e) => e == null
-                  ? null
-                  : Playlist.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => e == null ? null : Playlist.fromJson(e as Map))
               ?.toList()),
       trackIDs: $checkedConvert(json, 'trackIDs',
           (v) => (v as List)?.map((e) => e as String)?.toList()),
@@ -326,17 +311,15 @@ ChaChaUser _$ChaChaUserFromJson(Map<String, dynamic> json) {
           json,
           'friendRequests',
           (v) => (v as List)
-              ?.map((e) => e == null
-                  ? null
-                  : ChaChaUserAccountInfo.fromJson(e as Map<String, dynamic>))
+              ?.map((e) =>
+                  e == null ? null : ChaChaUserAccountInfo.fromJson(e as Map))
               ?.toList()),
       friends: $checkedConvert(
           json,
           'friends',
           (v) => (v as List)
-              ?.map((e) => e == null
-                  ? null
-                  : ChaChaUserAccountInfo.fromJson(e as Map<String, dynamic>))
+              ?.map((e) =>
+                  e == null ? null : ChaChaUserAccountInfo.fromJson(e as Map))
               ?.toList()),
       friendIDs: $checkedConvert(json, 'friendIDs',
           (v) => (v as List)?.map((e) => e as String)?.toList()),
@@ -347,8 +330,7 @@ ChaChaUser _$ChaChaUserFromJson(Map<String, dynamic> json) {
   });
 }
 
-Map<String, dynamic> _$ChaChaUserToJson(ChaChaUser instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'id': instance.id,
       'tracks': instance.tracks?.map((e) => e?.toJson())?.toList(),
       'trackIDs': instance.trackIDs,
