@@ -37,8 +37,10 @@ extension NullHelper on Entity {
   }
 }
 
-class Entity {
-  Map<String, dynamic> toJson() => null;
+abstract class Entity {
+  Map<String, dynamic> toJson();
+
+  Entity duplicate();
 }
 
 class ByteArrayJsonConverter implements JsonConverter<Uint8List, List<dynamic>> {
@@ -84,6 +86,9 @@ class EditSuggestion implements Entity {
   @override
   int get hashCode =>
       artistName.hashCode ^ trackName.hashCode ^ clipStart.hashCode ^ clipEnd.hashCode;
+
+  @override
+  Entity duplicate() => EditSuggestion.fromJson(toJson());
 }
 
 @JsonSerializable(
@@ -127,6 +132,9 @@ class SnippetTrack implements Entity {
 
   @override
   Map<String, dynamic> toJson() => _$SnippetTrackToJson(this);
+
+  @override
+  Entity duplicate() => SnippetTrack.fromJson(toJson());
 }
 
 @JsonSerializable(
@@ -180,11 +188,13 @@ class ScoredSnippetTrack extends SnippetTrack implements Entity {
           blurHash: track.blurHash,
         );
 
-  factory ScoredSnippetTrack.fromJson(Map json) =>
-      _$ScoredSnippetTrackFromJson(json);
+  factory ScoredSnippetTrack.fromJson(Map json) => _$ScoredSnippetTrackFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$ScoredSnippetTrackToJson(this);
+
+  @override
+  Entity duplicate() => ScoredSnippetTrack.fromJson(toJson());
 }
 
 @JsonSerializable(
@@ -210,6 +220,9 @@ class Waveform implements Entity {
 
   @override
   Map<String, dynamic> toJson() => _$WaveformToJson(this);
+
+  @override
+  Entity duplicate() => Waveform.fromJson(toJson());
 }
 
 @JsonSerializable(
@@ -293,6 +306,9 @@ class FullTrack extends SnippetTrack implements Entity {
 
   @override
   Map<String, dynamic> toJson() => _$FullTrackToJson(this);
+
+  @override
+  Entity duplicate() => FullTrack.fromJson(toJson());
 }
 
 @JsonSerializable(
@@ -320,6 +336,9 @@ class GeniusTrack implements Entity {
   String toString() {
     return 'GeniusSuggestion{trackURL: $trackURL, trackName: $trackName, artistName: $artistName, artistURL: $artistURL, lyrics: $lyrics}';
   }
+
+  @override
+  Entity duplicate() => GeniusTrack.fromJson(toJson());
 }
 
 @JsonSerializable(
@@ -387,23 +406,27 @@ class Playlist implements Entity {
 
   @override
   Map<String, dynamic> toJson() => _$PlaylistToJson(this);
+
+  @override
+  Entity duplicate() => Playlist.fromJson(toJson());
 }
 
 @JsonSerializable(
     checked: true, explicitToJson: true, createFactory: true, createToJson: true, anyMap: true)
-class ChaChaUserAccountInfo implements Entity {
+class UserAccountInfo implements Entity {
   String id;
   String displayName;
   String profilePicture;
 
-  ChaChaUserAccountInfo(
-      {@required this.id, @required this.displayName, @required this.profilePicture});
+  UserAccountInfo({@required this.id, @required this.displayName, @required this.profilePicture});
 
-  factory ChaChaUserAccountInfo.fromJson(Map json) =>
-      _$ChaChaUserAccountInfoFromJson(json);
+  factory UserAccountInfo.fromJson(Map json) => _$UserAccountInfoFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$ChaChaUserAccountInfoToJson(this);
+  Map<String, dynamic> toJson() => _$UserAccountInfoToJson(this);
+
+  @override
+  Entity duplicate() => UserAccountInfo.fromJson(toJson());
 }
 
 @JsonSerializable(
@@ -415,8 +438,8 @@ class User implements Entity {
   List<Playlist> playlists;
   List<String> playlistIDs;
   List<String> friendIDs;
-  List<ChaChaUserAccountInfo> friends;
-  List<ChaChaUserAccountInfo> friendRequests;
+  List<UserAccountInfo> friends;
+  List<UserAccountInfo> friendRequests;
   List<String> blockedUserIDs;
   bool public;
 
@@ -505,7 +528,7 @@ class User implements Entity {
     playlists = newPlaylists;
   }
 
-  void addFriend(ChaChaUserAccountInfo friend) {
+  void addFriend(UserAccountInfo friend) {
     friendIDs.add(friend.id);
     friends.add(friend);
   }
@@ -524,4 +547,7 @@ class User implements Entity {
 
   @override
   Map<String, dynamic> toJson() => _$UserToJson(this);
+
+  @override
+  Entity duplicate() => User.fromJson(toJson());
 }

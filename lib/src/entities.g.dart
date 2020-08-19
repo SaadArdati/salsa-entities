@@ -266,9 +266,9 @@ Map<String, dynamic> _$PlaylistToJson(Playlist instance) => <String, dynamic>{
       'public': instance.public,
     };
 
-ChaChaUserAccountInfo _$ChaChaUserAccountInfoFromJson(Map json) {
-  return $checkedNew('ChaChaUserAccountInfo', json, () {
-    final val = ChaChaUserAccountInfo(
+UserAccountInfo _$UserAccountInfoFromJson(Map json) {
+  return $checkedNew('UserAccountInfo', json, () {
+    final val = UserAccountInfo(
       id: $checkedConvert(json, 'id', (v) => v as String),
       displayName: $checkedConvert(json, 'displayName', (v) => v as String),
       profilePicture:
@@ -278,8 +278,7 @@ ChaChaUserAccountInfo _$ChaChaUserAccountInfoFromJson(Map json) {
   });
 }
 
-Map<String, dynamic> _$ChaChaUserAccountInfoToJson(
-        ChaChaUserAccountInfo instance) =>
+Map<String, dynamic> _$UserAccountInfoToJson(UserAccountInfo instance) =>
     <String, dynamic>{
       'id': instance.id,
       'displayName': instance.displayName,
@@ -311,15 +310,15 @@ User _$UserFromJson(Map json) {
           json,
           'friendRequests',
           (v) => (v as List)
-              ?.map((e) =>
-                  e == null ? null : ChaChaUserAccountInfo.fromJson(e as Map))
+              ?.map(
+                  (e) => e == null ? null : UserAccountInfo.fromJson(e as Map))
               ?.toList()),
       friends: $checkedConvert(
           json,
           'friends',
           (v) => (v as List)
-              ?.map((e) =>
-                  e == null ? null : ChaChaUserAccountInfo.fromJson(e as Map))
+              ?.map(
+                  (e) => e == null ? null : UserAccountInfo.fromJson(e as Map))
               ?.toList()),
       friendIDs: $checkedConvert(json, 'friendIDs',
           (v) => (v as List)?.map((e) => e as String)?.toList()),
