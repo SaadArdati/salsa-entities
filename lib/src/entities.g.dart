@@ -26,6 +26,22 @@ Map<String, dynamic> _$EditSuggestionToJson(EditSuggestion instance) =>
       'clipEnd': instance.clipEnd,
     };
 
+LyricsSuggestion _$LyricsSuggestionFromJson(Map json) {
+  return $checkedNew('LyricsSuggestion', json, () {
+    final val = LyricsSuggestion(
+      trackID: $checkedConvert(json, 'trackID', (v) => v as String),
+      lyrics: $checkedConvert(json, 'lyrics', (v) => v as String),
+    );
+    return val;
+  });
+}
+
+Map<String, dynamic> _$LyricsSuggestionToJson(LyricsSuggestion instance) =>
+    <String, dynamic>{
+      'trackID': instance.trackID,
+      'lyrics': instance.lyrics,
+    };
+
 SnippetTrack _$SnippetTrackFromJson(Map json) {
   return $checkedNew('SnippetTrack', json, () {
     final val = SnippetTrack(
@@ -166,6 +182,19 @@ FullTrack _$FullTrackFromJson(Map json) {
           (v) => (v as Map)?.map(
                 (k, e) => MapEntry(k as String, e as String),
               )),
+      lyricsSuggestions: $checkedConvert(
+          json,
+          'lyricsSuggestions',
+          (v) => (v as Map)?.map(
+                (k, e) => MapEntry(k as String,
+                    e == null ? null : LyricsSuggestion.fromJson(e as Map)),
+              )),
+      lyricsSuggestionVotes: $checkedConvert(
+          json,
+          'lyricsSuggestionVotes',
+          (v) => (v as Map)?.map(
+                (k, e) => MapEntry(k as String, e as String),
+              )),
       ngrams: $checkedConvert(json, 'ngrams',
           (v) => (v as List)?.map((e) => e as String)?.toList()),
       originURL: $checkedConvert(json, 'originURL', (v) => v as String),
@@ -197,6 +226,9 @@ Map<String, dynamic> _$FullTrackToJson(FullTrack instance) => <String, dynamic>{
       'editSuggestions':
           instance.editSuggestions?.map((k, e) => MapEntry(k, e?.toJson())),
       'editSuggestionVotes': instance.editSuggestionVotes,
+      'lyricsSuggestions':
+          instance.lyricsSuggestions?.map((k, e) => MapEntry(k, e?.toJson())),
+      'lyricsSuggestionVotes': instance.lyricsSuggestionVotes,
       'ngrams': instance.ngrams,
       'originURL': instance.originURL,
       'description': instance.description,
@@ -289,6 +321,7 @@ User _$UserFromJson(Map json) {
   return $checkedNew('User', json, () {
     final val = User(
       id: $checkedConvert(json, 'id', (v) => v as String),
+      tokens: $checkedConvert(json, 'tokens', (v) => v as int),
       public: $checkedConvert(json, 'public', (v) => v as bool),
       tracks: $checkedConvert(
           json,
@@ -331,6 +364,7 @@ User _$UserFromJson(Map json) {
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'id': instance.id,
+      'tokens': instance.tokens,
       'tracks': instance.tracks?.map((e) => e?.toJson())?.toList(),
       'trackIDs': instance.trackIDs,
       'playlists': instance.playlists?.map((e) => e?.toJson())?.toList(),

@@ -93,6 +93,37 @@ class EditSuggestion implements Entity {
 
 @JsonSerializable(
     checked: true, explicitToJson: true, createFactory: true, createToJson: true, anyMap: true)
+class LyricsSuggestion implements Entity {
+  String trackID;
+  String lyrics;
+
+  LyricsSuggestion({
+    @required this.trackID,
+    @required this.lyrics,
+  });
+
+  factory LyricsSuggestion.fromJson(Map json) => _$LyricsSuggestionFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$LyricsSuggestionToJson(this);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is LyricsSuggestion &&
+          runtimeType == other.runtimeType &&
+          trackID == other.trackID &&
+          lyrics == other.lyrics;
+
+  @override
+  int get hashCode => trackID.hashCode ^ lyrics.hashCode;
+
+  @override
+  Entity duplicate() => LyricsSuggestion.fromJson(toJson());
+}
+
+@JsonSerializable(
+    checked: true, explicitToJson: true, createFactory: true, createToJson: true, anyMap: true)
 @ByteArrayJsonConverter()
 class SnippetTrack implements Entity {
   String id;
@@ -236,6 +267,13 @@ class FullTrack extends SnippetTrack implements Entity {
 
   /// <User ID, Edit Suggestion ID>
   Map<String, String> editSuggestionVotes;
+
+  /// <User ID, Lyrics Suggestion>
+  Map<String, LyricsSuggestion> lyricsSuggestions;
+
+  /// <User ID, Lyrics Suggestion ID>
+  Map<String, String> lyricsSuggestionVotes;
+
   List<String> ngrams;
   String originURL;
   String description;
@@ -261,6 +299,8 @@ class FullTrack extends SnippetTrack implements Entity {
     @required this.geniusSuggestions,
     @required this.editSuggestions,
     @required this.editSuggestionVotes,
+    @required this.lyricsSuggestions,
+    @required this.lyricsSuggestionVotes,
     @required this.ngrams,
     @required this.originURL,
     @required this.description,
@@ -433,6 +473,7 @@ class UserAccountInfo implements Entity {
     checked: true, explicitToJson: true, createFactory: true, createToJson: true, anyMap: true)
 class User implements Entity {
   String id;
+  int tokens;
   List<SnippetTrack> tracks;
   List<String> trackIDs;
   List<Playlist> playlists;
@@ -445,6 +486,7 @@ class User implements Entity {
 
   User({
     @required this.id,
+    this.tokens = 0,
     this.public = false,
     this.tracks = const [],
     this.playlists = const [],
